@@ -8,4 +8,4 @@ int main()
   int b = 1;
   return a + b;
 }
-//#snippen_end:main
+//#snippet_end:main
