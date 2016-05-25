@@ -82,13 +82,13 @@ envire::core::EnvireGraph* createGraph()
 
 int main(int argc, char **argv)
 {
-  //#snippet_begin:graph_viz_example
+  //#snippet_begin:graph_viz_example_code
   QApplication app(argc, argv);
   EnvireVisualizerWindow window;
   std::shared_ptr<envire::core::EnvireGraph> graph(createGraph());
   window.displayGraph(graph, "A");
   window.show();
   app.exec();
-//#snippet_end:graph_viz_example 
+//#snippet_end:graph_viz_example_code
   return 0;
 }
