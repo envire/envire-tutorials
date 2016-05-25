@@ -6,6 +6,9 @@
         DFKI/robotik@dfki.de
     </copyright>
     <license>TODO</license>
-
+    <depend package="envire/envire_core" />
+    <depend package="tools/plugin_manager" />
+    <depend package="envire/envire_pcl" />
+    <depend package="gui/vizkit3d" />
 </package>
 
