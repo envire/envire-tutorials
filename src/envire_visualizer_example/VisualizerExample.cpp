@@ -14,7 +14,7 @@
 
 using namespace envire::viz;
 
-void writeGraphToFile(const std::string& file)
+envire::core::EnvireGraph* createGraph()
 {
   plugin_manager::PluginLoader* loader = plugin_manager::PluginLoader::getInstance();
   envire::core::ItemBase::Ptr cloudItem;
@@ -56,36 +56,36 @@ void writeGraphToFile(const std::string& file)
     std::cerr << turtlePcd << " does not exist" << std::endl;
   }
 
-  envire::core::EnvireGraph graph;
-  graph.addFrame("A"); 
-  graph.addFrame("B");
-  graph.addFrame("C");
-  graph.addFrame("D");
-  graph.addItemToFrame("B", cloud);
-  graph.addItemToFrame("D", cloud2);
-  graph.addItemToFrame("A", cloud3); //special case item in root node
+  envire::core::EnvireGraph* graph = new envire::core::EnvireGraph;
+  graph->addFrame("A"); 
+  graph->addFrame("B");
+  graph->addFrame("C");
+  graph->addFrame("D");
+  graph->addItemToFrame("B", cloud);
+  graph->addItemToFrame("D", cloud2);
+  graph->addItemToFrame("A", cloud3); //special case item in root node
   
   envire::core::Transform ab(base::Position(1, 1, 1), Eigen::Quaterniond::Identity());
-  graph.addTransform("A", "B", ab);
+  graph->addTransform("A", "B", ab);
   envire::core::Transform bc(base::Position(1, 0, 0.3), Eigen::Quaterniond(Eigen::AngleAxisd(0.3, Eigen::Vector3d(1,0,3))));
-  graph.addTransform("B", "C", ab);  
+  graph->addTransform("B", "C", ab);  
   envire::core::Transform cd(base::Position(0, 2, -1), Eigen::Quaterniond(Eigen::AngleAxisd(-0.8, Eigen::Vector3d(0,0,1))));
-  graph.addTransform("C", "D", cd);  
+  graph->addTransform("C", "D", cd);  
   
-  graph.addFrame("randTree");
+  graph->addFrame("randTree");
   envire::core::Transform aToForrest(base::Position(0, -3, -2), Eigen::Quaterniond(Eigen::AngleAxisd(0, Eigen::Vector3d(0,0,1))));
-  graph.addTransform("A", "randTree", aToForrest);
+  graph->addTransform("A", "randTree", aToForrest);
   
-  graph.saveToFile(file);
+  return graph;
 }
 
 int main(int argc, char **argv)
 {
-  writeGraphToFile("envire_graph_test_file");
-//#snippet_begin:graph_viz_example
+  //#snippet_begin:graph_viz_example
   QApplication app(argc, argv);
   EnvireVisualizerWindow window;
-  window.displayGraph("envire_graph_test_file");
+  std::shared_ptr<envire::core::EnvireGraph> graph(createGraph());
+  window.displayGraph(graph, "A");
   window.show();
   app.exec();
 //#snippet_end:graph_viz_example 
