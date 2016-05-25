@@ -1,8 +1,9 @@
+//#snippet_begin:graph_viz_example_includes
 #include <envire_core/EnvireVisualizerWindow.hpp>
 #include <envire_core/graph/EnvireGraph.hpp>
+//#snippet_end:graph_viz_example_includes
 #include <envire_core/items/Transform.hpp>
-#include <thread>
-#include <chrono>
+
 
 //following includes are only needed for writeGraphToFile()
 #include <plugin_manager/PluginLoader.hpp>
