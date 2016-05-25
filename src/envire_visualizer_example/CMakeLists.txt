@@ -10,8 +10,6 @@ rock_executable(envire_visualizer_example
                     envire_pcl
                     base-lib
                     envire_visualizer
-                DEPS_PLAIN 
-                    Boost_SYSTEM
 )
                 
 rock_executable(envire_visualizer_example_threaded
@@ -25,7 +23,5 @@ rock_executable(envire_visualizer_example_threaded
                     base-lib
                     vizkit3d
                     envire_visualizer
-                DEPS_PLAIN 
-                    Boost_SYSTEM
 )
                     
