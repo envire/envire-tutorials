@@ -13,6 +13,5 @@
     <depend package="envire_pcl" />
     <depend package="base-lib" />
     <depend package="vizkit3d" />
-    <depend package="envire_visualizer" />
 </package>
 
