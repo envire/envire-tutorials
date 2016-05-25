@@ -82,32 +82,12 @@ void writeGraphToFile(const std::string& file)
 int main(int argc, char **argv)
 {
   writeGraphToFile("envire_graph_test_file");
-
+//#snippet_begin:graph_viz_example
   QApplication app(argc, argv);
   EnvireVisualizerWindow window;
   window.displayGraph("envire_graph_test_file");
   window.show();
-  
-  std::shared_ptr<envire::core::EnvireGraph> loadedGraph(window.getGraph());
-  
-  std::thread t([&]() 
-  {
-    //NOTE: The graph itself is not thread safe, manipulating it from the
-    //      gui at the same time as this thread is running might crash.
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    
-    envire::core::Transform tf;
-    while(true)
-    {
-      std::this_thread::sleep_for(std::chrono::milliseconds(100));
-      
-      //rotate transformation
-      tf = loadedGraph->getTransform("A", "B");
-      tf.transform.orientation *= base::Quaterniond(Eigen::AngleAxisd(0.23, base::Position(1, 0, 0)));
-      loadedGraph->updateTransform("A", "B", tf);      
-    }
-  });
-  app.exec(); 
-  t.join();
+  app.exec();
+//#snippet_end:graph_viz_example 
   return 0;
 }
