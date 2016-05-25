@@ -1,0 +1,18 @@
+<package>
+    <description brief="Collection of tutorials for the envire framework">
+    </description>
+    <author>Arne Böckmann/arne.boeckmann@dfki.de</author>
+    <copyright>
+        DFKI/robotik@dfki.de
+    </copyright>
+    <license>TODO</license>
+    <depend package="envire_core" />
+    <depend package="plugin_manager" />
+    <depend package="pcl_common-1.7" />
+    <depend package="pcl_io-1.7" />
+    <depend package="envire_pcl" />
+    <depend package="base-lib" />
+    <depend package="vizkit3d" />
+    <depend package="envire_visualizer" />
+</package>
+
