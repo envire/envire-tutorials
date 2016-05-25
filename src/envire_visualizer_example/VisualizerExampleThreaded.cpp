@@ -1,8 +1,8 @@
-//#snippet_begin:graph_viz_example_includes
+//#snippet_begin:graph_viz_example_includes_thread
 #include <envire_core/EnvireVisualizerWindow.hpp>
 #include <envire_core/graph/EnvireGraph.hpp>
 #include <vizkit3d/QtThreadedWidget.hpp>
-//#snippet_end:graph_viz_example_includes
+//#snippet_end:graph_viz_example_includes_thread
 #include <envire_core/items/Transform.hpp>
 
 
@@ -83,7 +83,7 @@ envire::core::EnvireGraph* createGraph()
 
 int main(int argc, char **argv)
 {
-  //#snippet_begin:graph_viz_example
+  //#snippet_begin:graph_viz_example_thread
   QtThreadedWidget<EnvireVisualizerWindow> widget;
   widget.start();
   
@@ -91,7 +91,7 @@ int main(int argc, char **argv)
   EnvireVisualizerWindow* window = dynamic_cast<EnvireVisualizerWindow*>(widget.getWidget());
   window->displayGraph(graph, "A");
   window->show();
-//#snippet_end:graph_viz_example 
+//#snippet_end:graph_viz_example_thread
   while(true);
   return 0;
 }
