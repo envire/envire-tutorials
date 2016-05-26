@@ -40,5 +40,18 @@ int main(int argc, char **argv)
   //#snippet_end:graph_items_contains_type_index
   assert(contains2);
   
+  //#snippet_begin:graph_items_iteration
+  using Iterator = EnvireGraph::ItemIterator<envire::octomap::OcTree>;
+  Iterator it, end;
+  std::tie(it, end) = g.getItems<envire::octomap::OcTree>(frame);
+  for(; it != end; ++it)
+  {
+    std::cout << "Item uuid: " << it->getIDString() << std::endl;
+  }
+  //#snippet_end:graph_items_iteration
+  //#snippet_begin:graph_items_index_iterator
+  Iterator itemIt = g.getItem<envire::octomap::OcTree>(frame, 42);
+  //#snippet_end:graph_items_index_iterator
+  
   
 }
