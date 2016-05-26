@@ -15,7 +15,8 @@ int main(int argc, char **argv)
   
   //#snippet_begin:graph_items_load_octree
   envire::octomap::OcTree::Ptr octree;
-  if(!ClassLoader::createEnvireItem("envire::octomap::OcTree", octree))
+  ClassLoader* loader = ClassLoader::getInstance();
+  if(!loader->createEnvireItem("envire::octomap::OcTree", octree))
   {
     std::cerr << "Unabled to load envire::octomap::OcTree" << std::endl;
     return -1;
@@ -28,5 +29,16 @@ int main(int argc, char **argv)
   octree->setFrame(frame);
   g.addItem(octree);
   //#snippet_end:graph_items_setFrame
+  
+  //#snippet_begin:graph_items_contains_item
+  const bool contains = g.containsItems<envire::octomap::OcTree>(frame);
+  //#snippet_end:graph_items_contains_item
+  assert(contains);
+  //#snippet_begin:graph_items_contains_type_index
+  const std::type_index index(octree->getTypeIndex());
+  const bool contains2 = g.containsItems(frame, index);
+  //#snippet_end:graph_items_contains_type_index
+  assert(contains2);
+  
   
 }
