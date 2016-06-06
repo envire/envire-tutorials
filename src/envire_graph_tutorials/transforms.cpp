@@ -30,9 +30,12 @@ int main(int argc, char **argv)
   //#snippet_end:graph_transforms_get
 
   //#snippet_begin:graph_transforms_tree_get
-  TreeView view = g.getTree(graph.getVertex(a));
+  TreeView view = g.getTree(g.getVertex(a));
   const Transform tf3 = g.getTransform(a, b, view);
-  //#snippet_end:graph_transforms_tree_get
+  //#snippet_end:graph_transforms_tree_get 
   
-
+  //#snippet_begin:graph_transforms_path_get
+  const vector<FrameId> path = g.getPath(a, b);
+  const Transform tf4 = g.getTransform(path);
+  //#snippet_end:graph_transforms_path_get
 }
