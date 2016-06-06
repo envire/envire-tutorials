@@ -1,5 +1,5 @@
 #include <envire_core/graph/EnvireGraph.hpp>
-
+#include <vector>
 using namespace envire::core;
 
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
   //#snippet_end:graph_transforms_tree_get 
   
   //#snippet_begin:graph_transforms_path_get
-  const vector<FrameId> path = g.getPath(a, b);
+  const std::vector<FrameId> path = g.getPath(a, b);
   const Transform tf4 = g.getTransform(path);
   //#snippet_end:graph_transforms_path_get
 }

@@ -8,9 +8,17 @@ rock_executable(tutorial_frames
 
 rock_executable(tutorial_items
                 SOURCES items.cpp
-                DEPS_PKGCONFIG envire_core)                    
+                DEPS_PKGCONFIG envire_core)        
+                
+rock_executable(tutorial_transforms
+                SOURCES transforms.cpp
+                DEPS_PKGCONFIG envire_core)       
+
+rock_executable(tutorial_treeviews
+                SOURCES transforms.cpp
+                DEPS_PKGCONFIG envire_core)   
                 
 rock_library(tutorial_new_item
-             SOURCES newItem.cpp
+             SOURCES trees.cpp
              HEADERS newItem.h
              DEPS_PKGCONFIG envire_core)
