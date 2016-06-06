@@ -71,4 +71,7 @@ int main(int argc, char **argv)
   }
   //#snippet_end:graph_items_delete
   
+  //#snippet_begin:graph_items_clear
+  g.clearFrame(frame);
+  //#snippet_end:graph_items_clear
 }
