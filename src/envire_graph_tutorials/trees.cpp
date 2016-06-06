@@ -6,7 +6,7 @@ using namespace envire::core;
 
 int main(int argc, char **argv)
 {
-  //#snippet_begin:graph_transforms_add
+  //#snippet_begin:graph_trees_get
   EnvireGraph g;
   const FrameId root("root");
   /*
@@ -14,5 +14,5 @@ int main(int argc, char **argv)
    */
   TreeView view;
   g.getTree(root, true, &view);
-  //#snippet_end:graph_transforms_add
+  //#snippet_end:graph_trees_get
 }
