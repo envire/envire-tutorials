@@ -7,6 +7,7 @@
     </copyright>
     <license>TODO</license>
     <depend package="envire/envire_core" />
+    <depend package="envire/envire_octomap" />
     <depend package="tools/plugin_manager" />
     <depend package="envire/envire_pcl" />
     <depend package="gui/vizkit3d" />
