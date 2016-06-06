@@ -22,9 +22,11 @@ int main(int argc, char **argv)
     return -1;
   }
   //#snippet_end:graph_items_load_octree
+  
   //#snippet_begin:graph_items_add_to_frame
   g.addItemToFrame(frame, octree);
   //#snippet_end:graph_items_add_to_frame
+  
   //#snippet_begin:graph_items_setFrame
   octree->setFrame(frame);
   g.addItem(octree);
@@ -34,6 +36,7 @@ int main(int argc, char **argv)
   const bool contains = g.containsItems<envire::octomap::OcTree>(frame);
   //#snippet_end:graph_items_contains_item
   assert(contains);
+  
   //#snippet_begin:graph_items_contains_type_index
   const std::type_index index(octree->getTypeIndex());
   const bool contains2 = g.containsItems(frame, index);
@@ -49,9 +52,23 @@ int main(int argc, char **argv)
     std::cout << "Item uuid: " << it->getIDString() << std::endl;
   }
   //#snippet_end:graph_items_iteration
+  
   //#snippet_begin:graph_items_index_iterator
   Iterator itemIt = g.getItem<envire::octomap::OcTree>(frame, 42);
   //#snippet_end:graph_items_index_iterator
   
+  //#snippet_begin:graph_items_index_itemlist
+  const std::type_index index2(octree->getTypeIndex());
+  const Frame::ItemList& items = g.getItems(frame, index2);
+  //#snippet_end:graph_items_index_itemlist
+  
+  //#snippet_begin:graph_items_delete
+  Iterator i, endI;
+  std::tie(i, endI) = g.getItems<envire::octomap::OcTree>(frame);
+  for(; i != endI;)
+  {
+      std::tie(i, endI) = g.removeItemFromFrame(frame, i);
+  }
+  //#snippet_end:graph_items_delete
   
 }
