@@ -1,5 +1,5 @@
 //#snippet_begin:graph_viz_example_includes_thread
-#include <envire_core/EnvireVisualizerWindow.hpp>
+#include <envire_visualizer/EnvireVisualizerWindow.hpp>
 #include <envire_core/graph/EnvireGraph.hpp>
 #include <vizkit3d/QtThreadedWidget.hpp>
 //#snippet_end:graph_viz_example_includes_thread

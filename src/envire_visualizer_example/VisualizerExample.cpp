@@ -1,5 +1,5 @@
 //#snippet_begin:graph_viz_example_includes
-#include <envire_core/EnvireVisualizerWindow.hpp>
+#include <envire_visualizer/EnvireVisualizerWindow.hpp>
 #include <envire_core/graph/EnvireGraph.hpp>
 //#snippet_end:graph_viz_example_includes
 #include <envire_core/items/Transform.hpp>
