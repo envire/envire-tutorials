@@ -57,6 +57,8 @@ envire::core::EnvireGraph* createGraph()
     std::cerr << turtlePcd << " does not exist" << std::endl;
   }
 
+  envire::core::Item<std::string>::Ptr strItem(new envire::core::Item<std::string>("Huh. Did everything just taste purple for a second? "));
+  
   envire::core::EnvireGraph* graph = new envire::core::EnvireGraph;
   graph->addFrame("A"); 
   graph->addFrame("B");
@@ -65,6 +67,8 @@ envire::core::EnvireGraph* createGraph()
   graph->addItemToFrame("B", cloud);
   graph->addItemToFrame("D", cloud2);
   graph->addItemToFrame("A", cloud3); //special case item in root node
+  
+  graph->addItemToFrame("C", strItem);
   
   envire::core::Transform ab(base::Position(1, 1, 1), Eigen::Quaterniond::Identity());
   graph->addTransform("A", "B", ab);
