@@ -1,7 +1,8 @@
 #include <envire_core/graph/EnvireGraph.hpp>
 //#snippet_begin:graph_items_classloader_includes
 #include <envire_core/plugin/ClassLoader.hpp>
-#include <envire_octomap/OcTree.hpp>
+#include <envire_core/items/Item.hpp>
+#include <octomap/AbstractOcTree.h>
 //#snippet_end:graph_items_classloader_includes
 using namespace envire::core;
 
@@ -14,11 +15,11 @@ int main(int argc, char **argv)
   //#snippet_end:graph_items_setup
   
   //#snippet_begin:graph_items_load_octree
-  envire::octomap::OcTree::Ptr octree;
+  envire::core::Item<boost::shared_ptr<octomap::AbstractOcTree>>::Ptr octree;
   ClassLoader* loader = ClassLoader::getInstance();
-  if(!loader->createEnvireItem("envire::octomap::OcTree", octree))
+  if(!loader->createEnvireItem("envire::core::Item<boost::shared_ptr<octomap::AbstractOcTree>>", octree))
   {
-    std::cerr << "Unabled to load envire::octomap::OcTree" << std::endl;
+    std::cerr << "Unabled to load envire::core::Item<boost::shared_ptr<octomap::AbstractOcTree>>" << std::endl;
     return -1;
   }
   //#snippet_end:graph_items_load_octree
@@ -33,7 +34,7 @@ int main(int argc, char **argv)
   //#snippet_end:graph_items_setFrame
   
   //#snippet_begin:graph_items_contains_item
-  const bool contains = g.containsItems<envire::octomap::OcTree>(frame);
+  const bool contains = g.containsItems<envire::core::Item<boost::shared_ptr<octomap::AbstractOcTree>>>(frame);
   //#snippet_end:graph_items_contains_item
   assert(contains);
   
@@ -44,9 +45,9 @@ int main(int argc, char **argv)
   assert(contains2);
   
   //#snippet_begin:graph_items_iteration
-  using Iterator = EnvireGraph::ItemIterator<envire::octomap::OcTree>;
+  using Iterator = EnvireGraph::ItemIterator<envire::core::Item<boost::shared_ptr<octomap::AbstractOcTree>>>;
   Iterator it, end;
-  std::tie(it, end) = g.getItems<envire::octomap::OcTree>(frame);
+  std::tie(it, end) = g.getItems<envire::core::Item<boost::shared_ptr<octomap::AbstractOcTree>>>(frame);
   for(; it != end; ++it)
   {
     std::cout << "Item uuid: " << it->getIDString() << std::endl;
@@ -54,7 +55,7 @@ int main(int argc, char **argv)
   //#snippet_end:graph_items_iteration
   
   //#snippet_begin:graph_items_index_iterator
-  Iterator itemIt = g.getItem<envire::octomap::OcTree>(frame, 42);
+  Iterator itemIt = g.getItem<envire::core::Item<boost::shared_ptr<octomap::AbstractOcTree>>>(frame, 42);
   //#snippet_end:graph_items_index_iterator
   
   //#snippet_begin:graph_items_index_itemlist
@@ -64,7 +65,7 @@ int main(int argc, char **argv)
   
   //#snippet_begin:graph_items_delete
   Iterator i, endI;
-  std::tie(i, endI) = g.getItems<envire::octomap::OcTree>(frame);
+  std::tie(i, endI) = g.getItems<envire::core::Item<boost::shared_ptr<octomap::AbstractOcTree>>>(frame);
   for(; i != endI;)
   {
       std::tie(i, endI) = g.removeItemFromFrame(frame, i);

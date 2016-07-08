@@ -7,8 +7,7 @@
 
 //following includes are only needed for writeGraphToFile()
 #include <plugin_manager/PluginLoader.hpp>
-#include <envire_core/items/ItemBase.hpp>
-#include <envire_pcl/PointCloud.hpp>
+#include <envire_core/items/Item.hpp>
 #include <pcl/io/pcd_io.h>
 #include <QFile>
 #include <QApplication>
@@ -21,12 +20,12 @@ envire::core::EnvireGraph* createGraph()
   envire::core::ItemBase::Ptr cloudItem;
   envire::core::ItemBase::Ptr cloudItem2;
   envire::core::ItemBase::Ptr cloudItem3;
-  loader->createInstance("envire::pcl::PointCloud", cloudItem);
-  loader->createInstance("envire::pcl::PointCloud", cloudItem2);
-  loader->createInstance("envire::pcl::PointCloud", cloudItem3);
-  envire::pcl::PointCloud::Ptr cloud = boost::dynamic_pointer_cast<envire::pcl::PointCloud>(cloudItem);
-  envire::pcl::PointCloud::Ptr cloud2 = boost::dynamic_pointer_cast<envire::pcl::PointCloud>(cloudItem2);
-  envire::pcl::PointCloud::Ptr cloud3 = boost::dynamic_pointer_cast<envire::pcl::PointCloud>(cloudItem3);
+  loader->createInstance("envire::core::Item<pcl::PCLPointCloud2>", cloudItem);
+  loader->createInstance("envire::core::Item<pcl::PCLPointCloud2>", cloudItem2);
+  loader->createInstance("envire::core::Item<pcl::PCLPointCloud2>", cloudItem3);
+  envire::core::Item<pcl::PCLPointCloud2>::Ptr cloud = boost::dynamic_pointer_cast<envire::core::Item<pcl::PCLPointCloud2>>(cloudItem);
+  envire::core::Item<pcl::PCLPointCloud2>::Ptr cloud2 = boost::dynamic_pointer_cast<envire::core::Item<pcl::PCLPointCloud2>>(cloudItem2);
+  envire::core::Item<pcl::PCLPointCloud2>::Ptr cloud3 = boost::dynamic_pointer_cast<envire::core::Item<pcl::PCLPointCloud2>>(cloudItem3);
   
   const char* rootPath = std::getenv("AUTOPROJ_CURRENT_ROOT");
   if(rootPath == nullptr)
