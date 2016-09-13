@@ -35,7 +35,7 @@ int main(int argc, char **argv)
   //#snippet_end:graph_transforms_tree_get 
   
   //#snippet_begin:graph_transforms_path_get
-  const std::vector<FrameId> path = g.getPath(a, b);
+  envire::core::Path::Ptr path = g.getPath(a, b, false);
   const Transform tf4 = g.getTransform(path);
   //#snippet_end:graph_transforms_path_get
 }

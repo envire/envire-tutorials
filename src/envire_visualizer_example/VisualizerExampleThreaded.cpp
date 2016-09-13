@@ -9,6 +9,7 @@
 //following includes are only needed for writeGraphToFile()
 #include <plugin_manager/PluginLoader.hpp>
 #include <envire_core/items/Item.hpp>
+#include <envire_pcl/PointCloud.hpp>
 #include <pcl/io/pcd_io.h>
 #include <QFile>
 #include <QApplication>
@@ -86,9 +87,10 @@ int main(int argc, char **argv)
   QtThreadedWidget<EnvireVisualizerWindow> widget;
   widget.start();
   
-  std::shared_ptr<envire::core::EnvireGraph> graph(createGraph());
+//   std::shared_ptr<envire::core::EnvireGraph> graph(createGraph());
   EnvireVisualizerWindow* window = dynamic_cast<EnvireVisualizerWindow*>(widget.getWidget());
-  window->displayGraph(graph, "A");
+//   window->displayGraph(graph, "A");
+  
   window->show();
 //#snippet_end:graph_viz_example_thread_code
   while(true);

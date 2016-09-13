@@ -11,6 +11,8 @@
 #include <pcl/io/pcd_io.h>
 #include <QFile>
 #include <QApplication>
+#include <chrono>
+#include <thread>
 
 using namespace envire::viz;
 
@@ -91,6 +93,18 @@ int main(int argc, char **argv)
   std::shared_ptr<envire::core::EnvireGraph> graph(createGraph());
   window.displayGraph(graph, "A");
   window.show();
+  
+  std::thread t([&graph](){
+        while(true)
+        {
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
+        envire::core::Transform ab = graph->getTransform("A", "B");
+        ab.transform.translation.x() += 0.1;
+        std::cout << ab.transform.translation.x() << std::endl;
+        graph->updateTransform("A", "B", ab);
+        }
+    });
+  
   app.exec();
 //#snippet_end:graph_viz_example_code
   return 0;

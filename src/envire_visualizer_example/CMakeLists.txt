@@ -9,6 +9,7 @@ rock_executable(envire_visualizer_example
                     pcl_io-1.7
                     envire_pcl
                     base-lib
+                    base-logging
                     envire_visualizer
 )
                 
@@ -21,6 +22,7 @@ rock_executable(envire_visualizer_example_threaded
                     pcl_io-1.7
                     envire_pcl
                     base-lib
+                    base-logging
                     vizkit3d
                     envire_visualizer
 )
