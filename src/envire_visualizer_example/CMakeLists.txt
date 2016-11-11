@@ -13,6 +13,7 @@ rock_executable(envire_visualizer_example
                     base-lib
                     base-logging
                     envire_visualizer
+                    envire_smurf
 )
                 
 rock_executable(envire_visualizer_example_threaded
