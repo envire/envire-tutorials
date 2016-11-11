@@ -48,7 +48,7 @@ std::shared_ptr<envire::core::EnvireGraph> createGraph()
 //     
     std::shared_ptr<envire::smurf::GraphLoader> graphLoader(new envire::smurf::GraphLoader(graph, robotTf));
     smurf::Robot* robot = new(smurf::Robot);
-    robot->loadFromSmurf("/home/dfki.uni-bremen.de/aboeckmann/git/rock-entern/models/robots/crex/smurf/crex.smurf");
+    robot->loadFromSmurf("/home/dfki.uni-bremen.de/aboeckmann/git/rock-entern/models/robots/asguard_v4/smurf/asguard_v4.smurf");
     int nextGrpId = 0;
     graphLoader->loadStructure(graph->getVertex("robot"), *robot);
     graphLoader->loadVisuals(*robot);
