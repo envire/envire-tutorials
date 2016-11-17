@@ -2,3 +2,4 @@ set(deps_pkg_config base-types)
 
 add_subdirectory(envire_visualizer_example)
 add_subdirectory(envire_graph_tutorials)
+add_subdirectory(convert_ply_to_mls)

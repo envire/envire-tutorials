@@ -24,34 +24,34 @@ maps::grid::MLSMapPrecalculated mlsMap;
 std::shared_ptr<envire::core::EnvireGraph> createGraph()
 {   
     std::shared_ptr<envire::core::EnvireGraph> graph(new envire::core::EnvireGraph);
-    plugin_manager::PluginLoader* loader = plugin_manager::PluginLoader::getInstance();
-    envire::core::ItemBase::Ptr mapItem;
-    loader->createInstance("envire::core::Item<maps::grid::MLSMapPrecalculated>", mapItem);
-    assert(mapItem != nullptr);
-    envire::core::Item<maps::grid::MLSMapPrecalculated>::Ptr map =  boost::dynamic_pointer_cast<envire::core::Item<maps::grid::MLSMapPrecalculated>>(mapItem);
-        
-    envire::core::EnvireGraph g;
-    g.loadFromFile("/home/dfki.uni-bremen.de/aboeckmann/stuff/mls/graph_mls_kalman.bin");
-    map->setData(g.getItem<envire::core::Item<maps::grid::MLSMapKalman>>("mls_map", 0)->getData());
-    
-    graph->addFrame("root_node");
-    envire::core::Transform tf;
-    tf.setIdentity();
-    std::cout << "trans: " << tf.transform.translation.transpose() << std::endl;
-    graph->addTransform("root_node", "map", tf);
-    graph->addItemToFrame("map", map);
-        
-    envire::core::Transform robotTf;
-    robotTf.transform.translation << 0, 0, 1;
-    robotTf.transform.orientation.setIdentity();
-    graph->addTransform("root_node", "robot", robotTf);
+//     plugin_manager::PluginLoader* loader = plugin_manager::PluginLoader::getInstance();
+//     envire::core::ItemBase::Ptr mapItem;
+//     loader->createInstance("envire::core::Item<maps::grid::MLSMapPrecalculated>", mapItem);
+//     assert(mapItem != nullptr);
+//     envire::core::Item<maps::grid::MLSMapPrecalculated>::Ptr map =  boost::dynamic_pointer_cast<envire::core::Item<maps::grid::MLSMapPrecalculated>>(mapItem);
+//         
+//     envire::core::EnvireGraph g;
+//     g.loadFromFile("/home/dfki.uni-bremen.de/aboeckmann/stuff/mls/graph_mls_kalman.bin");
+//     map->setData(g.getItem<envire::core::Item<maps::grid::MLSMapKalman>>("mls_map", 0)->getData());
 //     
-    std::shared_ptr<envire::smurf::GraphLoader> graphLoader(new envire::smurf::GraphLoader(graph, robotTf));
-    smurf::Robot* robot = new(smurf::Robot);
-    robot->loadFromSmurf("/home/dfki.uni-bremen.de/aboeckmann/git/rock-entern/models/robots/asguard_v4/smurf/asguard_v4.smurf");
-    int nextGrpId = 0;
-    graphLoader->loadStructure(graph->getVertex("robot"), *robot);
-    graphLoader->loadVisuals(*robot);
+     graph->addFrame("root_node");
+//     envire::core::Transform tf;
+//     tf.setIdentity();
+//     std::cout << "trans: " << tf.transform.translation.transpose() << std::endl;
+//     graph->addTransform("root_node", "map", tf);
+//     graph->addItemToFrame("map", map);
+        
+//     envire::core::Transform robotTf;
+//     robotTf.transform.translation << 0, 0, 1;
+//     robotTf.transform.orientation.setIdentity();
+//     graph->addTransform("root_node", "robot", robotTf);
+//      
+//     std::shared_ptr<envire::smurf::GraphLoader> graphLoader(new envire::smurf::GraphLoader(graph, robotTf));
+//     smurf::Robot* robot = new(smurf::Robot);
+//     robot->loadFromSmurf("/home/dfki.uni-bremen.de/aboeckmann/git/rock-entern/models/robots/asguard_v4/smurf/asguard_v4.smurf");
+//     int nextGrpId = 0;
+//     graphLoader->loadStructure(graph->getVertex("robot"), *robot);
+//     graphLoader->loadVisuals(*robot);
     
 //     graphLoader->loadRobot(nextGrpId, graph->getVertex("robot"), robotTf, *robot);
     
