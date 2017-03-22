@@ -1,5 +1,5 @@
 find_package( Boost COMPONENTS system)
-find_package(PCL 1.7 REQUIRED COMPONENTS common)
+find_package(PCL 1.8 REQUIRED COMPONENTS common)
 
 set(PCL_LIBS pcl_common-${PCL_VERSION_MAJOR}.${PCL_VERSION_MINOR} pcl_io-${PCL_VERSION_MAJOR}.${PCL_VERSION_MINOR})
 
