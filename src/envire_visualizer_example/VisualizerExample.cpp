@@ -1,3 +1,29 @@
+//
+// Copyright (c) 2015, Deutsches Forschungszentrum für Künstliche Intelligenz GmbH.
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// * Redistributions of source code must retain the above copyright notice, this
+//   list of conditions and the following disclaimer.
+//
+// * Redistributions in binary form must reproduce the above copyright notice,
+//   this list of conditions and the following disclaimer in the documentation
+//   and/or other materials provided with the distribution.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+
 //#snippet_begin:graph_viz_example_includes
 #include <envire_visualizer/EnvireVisualizerWindow.hpp>
 #include <envire_core/graph/EnvireGraph.hpp>
@@ -87,23 +113,42 @@ envire::core::EnvireGraph* createGraph()
 
 int main(int argc, char **argv)
 {
-  //#snippet_begin:graph_viz_example_code
-  QApplication app(argc, argv);
-  EnvireVisualizerWindow window;
-  std::shared_ptr<envire::core::EnvireGraph> graph(createGraph());
-  window.displayGraph(graph, "A");
-  window.show();
-  
-  std::thread t([&graph](){
+    //#snippet_begin:graph_viz_example_code
+    QApplication app(argc, argv);
+    EnvireVisualizerWindow window;
+    std::shared_ptr<envire::core::EnvireGraph> graph(createGraph());
+    window.displayGraph(graph, "A");
+    window.show();
+      
+    std::thread t([&graph, &window](){
+        double expand = 0.01;
         while(true)
         {
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
-        envire::core::Transform ab = graph->getTransform("A", "B");
-        ab.transform.translation.x() += 0.1;
-        std::cout << ab.transform.translation.x() << std::endl;
-        graph->updateTransform("A", "B", ab);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            envire::core::Transform ab = graph->getTransform("A", "B");
+            
+            if(ab.transform.translation.x() > 1)
+                expand = -0.01;
+            else if(ab.transform.translation.x() < 0.3)
+                expand = 0.01;
+            
+            ab.transform.translation.x() += expand;
+            graph->updateTransform("A", "B", ab);
+            window.redraw();
         }
     });
+  
+    std::thread t2([&graph, &window](){
+    while(true)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        envire::core::Transform bc = graph->getTransform("B", "C");
+        bc.transform.orientation = base::Quaterniond(base::AngleAxisd(0.017, base::Vector3d::UnitY())) * bc.transform.orientation;
+        graph->updateTransform("B", "C", bc);
+        window.redraw();
+    }
+    });
+  
   
   app.exec();
 //#snippet_end:graph_viz_example_code
