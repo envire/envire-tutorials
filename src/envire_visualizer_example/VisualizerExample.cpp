@@ -119,14 +119,15 @@ int main(int argc, char **argv)
     std::shared_ptr<envire::core::EnvireGraph> graph(createGraph());
     window.displayGraph(graph, "A");
     window.show();
-      
-    std::thread t([&graph, &window](){
+    
+    bool run = true;
+    
+    std::thread t([&graph, &window, &run](){
         double expand = 0.01;
-        while(true)
+        while(run)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
             envire::core::Transform ab = graph->getTransform("A", "B");
-            
             if(ab.transform.translation.x() > 1)
                 expand = -0.01;
             else if(ab.transform.translation.x() < 0.3)
@@ -138,8 +139,8 @@ int main(int argc, char **argv)
         }
     });
   
-    std::thread t2([&graph, &window](){
-    while(true)
+    std::thread t2([&graph, &window, &run](){
+    while(run)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
         envire::core::Transform bc = graph->getTransform("B", "C");
@@ -149,8 +150,12 @@ int main(int argc, char **argv)
     }
     });
   
-  
+  QApplication::instance()->connect(&window, SIGNAL(widgetClosed()), QApplication::instance(), SLOT(quit())); 
   app.exec();
+  run = false;
+  t.join();
+  t2.join();
+//   
 //#snippet_end:graph_viz_example_code
   return 0;
 }
