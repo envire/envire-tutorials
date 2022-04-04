@@ -8,7 +8,7 @@ rock_executable(tutorial_frames
 
 rock_executable(tutorial_items
                 SOURCES items.cpp
-                DEPS_PKGCONFIG envire_core)        
+                DEPS_PKGCONFIG envire_core octomap)        
                 
 rock_executable(tutorial_transforms
                 SOURCES transforms.cpp
